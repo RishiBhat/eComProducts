@@ -91,18 +91,65 @@ def handelLogout(request):
 
 
 
-#we will form the table of prouct here in views
+#we will form the table of prouct here in views with the use of forms and admin and the models 
 
-
+from .forms import ProductForm
 from .models import Product
 
-def prod(request, id):
-    params = Product.objects.get(id=id)
+
+
+
+
+def form(request):
+    
+        form = ProductForm()
+        if request.POST:
+            form= ProductForm(data= request.POST, files=request.FILES)
+            if form.is_valid:
+                form.request.get('prtotal')
+                form.request.get('prprice')
+                form.request.get('prqty')
+                prtotal=request.POST['prprice'*'prqty'] 
+                form.save()
+                return redirect('home')
+
+        return render(request,'prform.html', {'form': form})
+
+
+#Here the product display is done which I will be using it for the later
+
+
+def prod(request):
+    params = Product.objects.all()
     print(params)
-    print(params.id)
-    print(params.prname)
-    #profile = {"id" : obj.id, "name" : obj.name, "email" : obj.email, "password" : obj.password, "desc" : obj.desc}
     return render(request, 'prod.html', {'params':params})
 
 
+def update(request,id):
+    ris = Product.objects.get(id=id)
+    form=ProductForm(instance=ris, data=request.POST or None, files=request.FILES or None) 
+    if request.POST:
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    return render(request, 'prform.html',{'form':form})
+    
+    
+    
+    
+def delete(request, id):
+    bt= Product.objects.get(id=id)
+    bt.delete()
+    return redirect('home')
 
+
+
+#here we will create a single product list 
+
+
+def prolist(request,id):
+   
+     ris = Product.objects.get(id=id)
+     
+     print(ris.prprice)
+     return HttpResponse("working")

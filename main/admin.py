@@ -6,6 +6,4 @@ from .models import Product
 
 admin.site.register(Product)
 
-class ProductAdmin(admin.ModelAdmin):
-    list_display =['id', 'prname','prtype', 'pr','prprice', 'prqty', 'prtotal','primage']
 

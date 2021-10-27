@@ -12,24 +12,17 @@
   </head>
   
   <body>
-        
         <div class="container">
           <div class="card-cloumns my-5">  
-          {% for i  in params reversed%}
             <div class="card mx-2">
-               <img src="{{i.primage.url}}" class="center">
+               <img src="{{params.primage.url}}" class="center">
                 <div class="card-body">
                   <h5 class="card-title">{{i.prname}}</h5>
                     <p class="card-text">{{i.prtype}}</p>
                     <p class="card-text"><small class="text-muted">{{i.prtotal}}</small></p>
                 </div>
             </div>
-          {% endfor %}
           </div>
         </div>      
   </body>
 </html>
-
-
-
-

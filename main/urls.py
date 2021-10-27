@@ -9,7 +9,15 @@ urlpatterns = [
     path('signup', views.handleSignUp, name="handleSignUp"),
     path('login', views.handeLogin, name="handleLogin"),
     path('logout', views.handelLogout, name="handleLogout"),
-    path('prod/<int:id>', views.prod,name="prod"),
+    
+    
+    path('form/', views.form,name="form"),
+    path('prod/', views.prod,name="prod"),
+    path('update/<int:id>', views.update,name="update"),
+    path('delete/<int:id>', views.delete,name="delete"),
+    path('prolist/<int:id>', views.prolist,name="prolist"),
+    
+    
     
     
 ]

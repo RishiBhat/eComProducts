@@ -1,3 +1,4 @@
+
 from django.db import models
 from django.db.models.base import Model
 
@@ -11,23 +12,20 @@ class Product(models.Model):
     prtype=models.CharField(max_length=500)
     pr=models.CharField(max_length=500)
     prprice=models.IntegerField(default=400)
-    pr=models.IntegerField(default=400)
+    #pr=models.IntegerField(default=400)
+    produ=models.CharField(max_length=500, default="")
     prprice=models.IntegerField(default=400)
     prqty=models.IntegerField(default=80)
-    prtotal=models.IntegerField(default=500)
-    primage = models.ImageField(upload_to='upload_image', default='static/main/Dal.jpg')
+    prtotal=models.IntegerField(null=True, blank= True)
+    primage = models.ImageField(upload_to='images/', default='',blank=True)
     
     
-    def upload_image(self, filename):
-        return 'post/{static}/{main}'.format(self.title, filename)
+    def __str__(self):
+        return self.prname
+    
+    def save(self, *args, **kwargs): 
+        self.prtotal = self.prqty * self.prprice
+        super(Product, self).save(*args, **kwargs)
 
 
-
-
-    #model_pic= models.ImageField(upload_to=upload_image, default='blog/images/already.png')
-    #created_date = models.DateTimeField(default = timezone.now)
-    #published_date = models.DateTimeField(blank = True, null =True)
-
-
-    #def upload_image(self, filename):
-        #return 'post/{}/{}'.format(self.title, filename)
+   
